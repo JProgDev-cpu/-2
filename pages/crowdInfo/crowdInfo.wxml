@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="spot-list">
+    <view class="spot-card" wx:for="{{spots}}" wx:key="id">
+      <image class="spot-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="spot-info">
+        <view class="spot-header">
+          <text class="spot-name">{{currentLang === 'th' ? item.name : (currentLang === 'zh' ? item.name_zh : item.name_en)}}</text>
+          <view class="crowd-badge level-{{item.crowdLevel}}">
+            {{item.crowdLevel === 1 ? '空闲' : (item.crowdLevel === 2 ? '适中' : '拥挤')}}
+          </view>
+        </view>
+        
+        <view class="crowd-details">
+          <view class="detail-item">
+            <text class="label">当前人数：</text>
+            <text class="value">{{item.currentCount}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">最大容量：</text>
+            <text class="value">{{item.maxCount}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">预计等待：</text>
+            <text class="value">{{item.waitTime}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">最佳游览时间：</text>
+            <text class="value">{{item.bestVisitTime}}</text>
+          </view>
+        </view>
+
+        <view class="progress-bar">
+          <view class="progress" style="width: {{item.currentCount / item.maxCount * 100}}%"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

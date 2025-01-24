@@ -1,0 +1,101 @@
+<view class="container">
+  <!-- 交通方式选择 -->
+  <view class="transport-selector">
+    <view 
+      class="transport-item {{transportMode === 'driving' ? 'active' : ''}}"
+      bindtap="switchTransport"
+      data-mode="driving"
+    >
+      <image src="../../assets/icons/car.png" class="transport-icon"></image>
+      <text>驾车</text>
+    </view>
+    <view 
+      class="transport-item {{transportMode === 'transit' ? 'active' : ''}}"
+      bindtap="switchTransport"
+      data-mode="transit"
+    >
+      <image src="../../assets/icons/bus.png" class="transport-icon"></image>
+      <text>公交</text>
+    </view>
+    <view 
+      class="transport-item {{transportMode === 'walking' ? 'active' : ''}}"
+      bindtap="switchTransport"
+      data-mode="walking"
+    >
+      <image src="../../assets/icons/walk.png" class="transport-icon"></image>
+      <text>步行</text>
+    </view>
+  </view>
+
+  <!-- 景点选择列表 -->
+  <scroll-view class="spots-selector" scroll-y>
+    <view class="section-title">选择要游览的景点</view>
+    <view 
+      class="spot-item {{selectedSpots.includes(item.id) ? 'selected' : ''}}"
+      wx:for="{{spots}}" 
+      wx:key="id"
+      bindtap="toggleSpot"
+      data-id="{{item.id}}"
+    >
+      <image src="{{item.image}}" mode="aspectFill"></image>
+      <view class="spot-info">
+        <text class="spot-name">{{currentLang === 'th' ? item.name : (currentLang === 'zh' ? item.name_zh : item.name_en)}}</text>
+        <text class="visit-time">建议游览时间：{{item.visitTime}}分钟</text>
+        <text class="suggest-time">{{item.suggestTime}}</text>
+      </view>
+      <view class="checkbox">
+        <icon type="success" size="20" color="#4CAF50" wx:if="{{selectedSpots.includes(item.id)}}"/>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 生成路线按钮 -->
+  <view class="generate-button" bindtap="generateRoute">
+    生成最佳路线
+  </view>
+
+  <!-- 路线详情 -->
+  <view class="route-details {{showRouteDetails ? 'show' : ''}}">
+    <view class="details-header">
+      <text class="details-title">推荐路线</text>
+      <icon type="cancel" size="24" color="#999" bindtap="closeRouteDetails"></icon>
+    </view>
+
+    <scroll-view class="details-content" scroll-y>
+      <view class="summary">
+        <view class="summary-item">
+          <text class="label">总距离</text>
+          <text class="value">{{routeDetails.totalDistance.toFixed(1)}}公里</text>
+        </view>
+        <view class="summary-item">
+          <text class="label">游览时间</text>
+          <text class="value">{{routeDetails.totalTime}}分钟</text>
+        </view>
+      </view>
+
+      <view class="route-segments">
+        <view class="segment" wx:for="{{routeDetails.segments}}" wx:key="index">
+          <view class="segment-line">
+            <view class="dot"></view>
+            <view class="line"></view>
+          </view>
+          <view class="segment-content">
+            <view class="segment-header">
+              <text class="from">{{item.from}}</text>
+              <text class="distance">{{item.distance}}km</text>
+            </view>
+            <view class="segment-info">
+              <text class="duration">约{{item.duration}}分钟</text>
+              <button 
+                class="nav-btn" 
+                size="mini" 
+                bindtap="startNavigation" 
+                data-index="{{index}}"
+              >导航</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view> 

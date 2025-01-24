@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/crowdInfo/crowdInfo",
+    "pages/routePlanner/routePlanner",
+    "pages/shop/shop",
+    "pages/shop/detail/detail",
+    "pages/arView/arView"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarTitleText": "泰国旅游助手",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/crowdInfo/crowdInfo",
+        "text": "人流量"
+      },
+      {
+        "pagePath": "pages/routePlanner/routePlanner",
+        "text": "规划路线"
+      },
+      {
+        "pagePath": "pages/shop/shop",
+        "text": "文创店"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "weui": true
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于导航到景点"
+    }
+  }
+} 

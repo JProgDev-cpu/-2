@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 语言切换器 -->
+  <view class="language-switcher">
+    <text class="{{currentLang === 'th' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="th">ไทย</text>
+    <text class="{{currentLang === 'zh' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="zh">中文</text>
+    <text class="{{currentLang === 'en' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="en">EN</text>
+  </view>
+
+  <!-- 轮播图 -->
+  <swiper class="banner-swiper" indicator-dots autoplay circular>
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image src="{{item.image}}" mode="aspectFill" class="banner-image"></image>
+      <view class="banner-title">{{item.title}}</view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 景点列表 -->
+  <view class="spots-container">
+    <view class="section-title">热门景点</view>
+    <view class="spots-grid">
+      <view class="spot-card" wx:for="{{spots}}" wx:key="id" bindtap="goToSpotDetail" data-id="{{item.id}}">
+        <image class="spot-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="spot-info">
+          <view class="spot-header">
+            <text class="spot-name">{{currentLang === 'th' ? item.name : (currentLang === 'zh' ? item.name_zh : item.name_en)}}</text>
+            <view class="crowd-tag level-{{item.crowdLevel}}">
+              {{item.crowdLevel === 1 ? '空闲' : (item.crowdLevel === 2 ? '适中' : '拥挤')}}
+            </view>
+          </view>
+          <text class="spot-location">{{item.location}}</text>
+          <text class="spot-desc">{{item.description}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AR查看按钮 -->
+  <view class="ar-button" bindtap="goToAR">
+    <text>AR实景查看</text>
+  </view>
+</view> 

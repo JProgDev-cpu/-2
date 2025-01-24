@@ -1,0 +1,36 @@
+<view class="container">
+  <!-- 商品图片轮播 -->
+  <swiper class="product-swiper" indicator-dots circular>
+    <swiper-item wx:for="{{product.images}}" wx:key="*this">
+      <image 
+        src="{{item}}" 
+        mode="aspectFill" 
+        bindtap="previewImage"
+        data-src="{{item}}">
+      </image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 商品信息 -->
+  <view class="product-info">
+    <text class="product-name">
+      {{currentLang === 'th' ? product.name : (currentLang === 'zh' ? product.name_zh : product.name_en)}}
+    </text>
+    <text class="product-price">฿{{product.price}}</text>
+    <text class="product-desc">{{product.description}}</text>
+  </view>
+
+  <!-- 商品规格 -->
+  <view class="specs-section">
+    <text class="section-title">商品规格</text>
+    <view class="specs-list">
+      <text wx:for="{{product.specs}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar">
+    <button class="add-to-cart" bindtap="addToCart">加入购物车</button>
+    <button class="buy-now" bindtap="buyNow">立即购买</button>
+  </view>
+</view> 
