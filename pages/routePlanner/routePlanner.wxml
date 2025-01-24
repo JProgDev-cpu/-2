@@ -6,7 +6,7 @@
       bindtap="switchTransport"
       data-mode="driving"
     >
-      <image src="../../assets/icons/car.png" class="transport-icon"></image>
+      <text class="transport-icon">🚗</text>
       <text>驾车</text>
     </view>
     <view 
@@ -14,7 +14,7 @@
       bindtap="switchTransport"
       data-mode="transit"
     >
-      <image src="../../assets/icons/bus.png" class="transport-icon"></image>
+      <text class="transport-icon">🚌</text>
       <text>公交</text>
     </view>
     <view 
@@ -22,7 +22,7 @@
       bindtap="switchTransport"
       data-mode="walking"
     >
-      <image src="../../assets/icons/walk.png" class="transport-icon"></image>
+      <text class="transport-icon">🚶</text>
       <text>步行</text>
     </view>
   </view>

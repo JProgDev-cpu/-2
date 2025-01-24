@@ -27,8 +27,7 @@
 }
 
 .transport-icon {
-  width: 48rpx;
-  height: 48rpx;
+  font-size: 48rpx;
   margin-bottom: 10rpx;
 }
 

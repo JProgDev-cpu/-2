@@ -9,7 +9,7 @@ Page({
         name_zh: '大皇宫',
         name_en: 'Grand Palace',
         crowdLevel: 3,
-        image: '../../assets/images/spots/grand-palace.jpg',
+        image: 'https://via.placeholder.com/750x500.png?text=Grand+Palace',
         description: '泰国最著名的旅游景点之一，建于1782年，是泰国大皇宫的主体建筑群。',
         location: '曼谷市中心'
       },
