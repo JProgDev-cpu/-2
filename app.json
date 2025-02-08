@@ -20,19 +20,19 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页"
+        "text": "หน้าแรก"
       },
       {
         "pagePath": "pages/crowdInfo/crowdInfo",
-        "text": "人流量"
+        "text": "ความหนาแน่น"
       },
       {
         "pagePath": "pages/routePlanner/routePlanner",
-        "text": "规划路线"
+        "text": "วางแผนเส้นทาง"
       },
       {
         "pagePath": "pages/shop/shop",
-        "text": "文创店"
+        "text": "ร้านค้า"
       }
     ]
   },

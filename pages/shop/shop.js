@@ -1,6 +1,9 @@
+const app = getApp();
+
 Page({
   data: {
-    currentLang: 'th',
+    currentLang: app.getCurrentLang(),
+    languages: ['th', 'zh', 'en'],
     categories: [
       { id: 1, name: 'ของที่ระลึก', name_zh: '纪念品', name_en: 'Souvenirs' },
       { id: 2, name: 'งานฝีมือ', name_zh: '手工艺品', name_en: 'Handicrafts' },
@@ -8,9 +11,11 @@ Page({
     ],
     currentCategory: 1,
     products: [
+      // 泰国商品
       {
         id: 1,
         categoryId: 1,
+        country: 'th',
         name: 'พวงกุญแจช้าง',
         name_zh: '大象钥匙扣',
         name_en: 'Elephant Keychain',
@@ -21,14 +26,57 @@ Page({
       {
         id: 2,
         categoryId: 2,
+        country: 'th',
         name: 'ผ้าไหมไทย',
         name_zh: '泰丝围巾',
         name_en: 'Thai Silk Scarf',
         price: 599,
         image: '/assets/images/products/silk.jpg',
         description: '传统泰式丝绸围巾，100%天然蚕丝'
+      },
+      // 中国商品
+      {
+        id: 3,
+        categoryId: 1,
+        country: 'cn',
+        name: 'แจกันเคลือบ',
+        name_zh: '青花瓷花瓶',
+        name_en: 'Blue and White Vase',
+        price: 899,
+        image: '/assets/images/products/vase.jpg',
+        description: '传统青花瓷工艺花瓶'
+      },
+      {
+        id: 4,
+        categoryId: 2,
+        country: 'cn',
+        name: 'พู่กันจีน',
+        name_zh: '毛笔套装',
+        name_en: 'Chinese Brush Set',
+        price: 299,
+        image: '/assets/images/products/brush.jpg',
+        description: '传统毛笔书法套装'
       }
     ]
+  },
+
+  onLoad() {
+    wx.eventChannel.on('languageChanged', this.handleLanguageChange);
+  },
+
+  onUnload() {
+    wx.eventChannel.off('languageChanged', this.handleLanguageChange);
+  },
+
+  handleLanguageChange(data) {
+    this.setData({
+      currentLang: data.lang
+    });
+  },
+
+  switchLanguage(e) {
+    const lang = e.currentTarget.dataset.lang;
+    app.switchLanguage(lang);
   },
 
   switchCategory(e) {
@@ -50,4 +98,4 @@ Page({
       icon: 'success'
     });
   }
-}); 
+});

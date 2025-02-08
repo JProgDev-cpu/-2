@@ -1,0 +1,61 @@
+<view class="container">
+  <!-- 语言切换 -->
+  <view class="language-switcher">
+    <text class="{{currentLang === 'th' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="th">ไทย</text>
+    <text class="{{currentLang === 'zh' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="zh">中文</text>
+    <text class="{{currentLang === 'en' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="en">EN</text>
+  </view>
+
+  <!-- 标题 -->
+  <view class="header">
+    <text class="title">{{translations.title[currentLang]}}</text>
+    <text class="spot-name">{{currentLang === 'th' ? spot.name : (currentLang === 'zh' ? spot.name_zh : spot.name_en)}}</text>
+  </view>
+
+  <!-- 当前人流量 -->
+  <view class="current-crowd">
+    <text class="section-title">{{translations.currentLevel[currentLang]}}</text>
+    <view class="crowd-display">
+      <view class="crowd-indicator level-{{spot.currentCrowd}}">
+        {{translations.levels[spot.currentCrowd][currentLang]}}
+      </view>
+      <text class="update-time">{{currentTime}}</text>
+    </view>
+  </view>
+
+  <!-- 历史人流量 -->
+  <view class="crowd-history">
+    <text class="section-title">{{translations.history[currentLang]}}</text>
+    <view class="timeline">
+      <view class="timeline-item" wx:for="{{crowdHistory}}" wx:key="time">
+        <text class="time">{{item.time}}</text>
+        <view class="level-bar level-{{item.level}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预测人流量 -->
+  <view class="crowd-forecast">
+    <text class="section-title">{{translations.forecast[currentLang]}}</text>
+    <view class="timeline">
+      <view class="timeline-item" wx:for="{{crowdForecast}}" wx:key="time">
+        <text class="time">{{item.time}}</text>
+        <view class="level-bar level-{{item.level}} forecast"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游览建议 -->
+  <view class="visit-tips">
+    <text class="section-title">{{translations.tips[currentLang]}}</text>
+    <view class="best-time">
+      <text class="tip-label">{{currentLang === 'th' ? 'เวลาที่เหมาะสม' : (currentLang === 'zh' ? '最佳游览时间' : 'Best Time to Visit')}}</text>
+      <text class="tip-content">{{spot.bestVisitTime[currentLang]}}</text>
+    </view>
+    <view class="tips-list">
+      <view class="tip-item" wx:for="{{spot.tips[currentLang]}}" wx:key="*this">
+        <text class="tip-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view> 

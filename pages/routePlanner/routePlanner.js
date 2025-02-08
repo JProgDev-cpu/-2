@@ -1,8 +1,75 @@
+const app = getApp();
+
 Page({
   data: {
-    currentLang: 'th',
+    currentLang: app.getCurrentLang(),
+    languages: ['th', 'zh', 'en'],
+    translations: {
+      title: {
+        th: 'เลือกสถานที่ท่องเที่ยว',
+        zh: '选择要游览的景点',
+        en: 'Select Destinations'
+      },
+      generateRoute: {
+        th: 'สร้างเส้นทางที่ดีที่สุด',
+        zh: '生成最佳路线',
+        en: 'Generate Best Route'
+      },
+      recommendedRoute: {
+        th: 'เส้นทางแนะนำ',
+        zh: '推荐路线',
+        en: 'Recommended Route'
+      },
+      totalDistance: {
+        th: 'ระยะทางทั้งหมด',
+        zh: '总距离',
+        en: 'Total Distance'
+      },
+      visitTime: {
+        th: 'เวลาเที่ยวชม',
+        zh: '游览时间',
+        en: 'Visit Time'
+      },
+      minutes: {
+        th: 'นาที',
+        zh: '分钟',
+        en: 'minutes'
+      },
+      kilometer: {
+        th: 'กิโลเมตร',
+        zh: '公里',
+        en: 'km'
+      },
+      navigation: {
+        th: 'นำทาง',
+        zh: '导航',
+        en: 'Navigate'
+      },
+      about: {
+        th: 'ประมาณ',
+        zh: '约',
+        en: 'About'
+      }
+    },
     selectedSpots: [],
     transportMode: 'driving', // 交通方式：driving（驾车）、transit（公交）、walking（步行）
+    transportModeText: {
+      driving: {
+        th: 'รถยนต์',
+        zh: '驾车',
+        en: 'Drive'
+      },
+      transit: {
+        th: 'ขนส่งสาธารณะ',
+        zh: '公交',
+        en: 'Transit'
+      },
+      walking: {
+        th: 'เดิน',
+        zh: '步行',
+        en: 'Walk'
+      }
+    },
     spots: [
       {
         id: 1,
@@ -38,6 +105,22 @@ Page({
 
   onLoad() {
     this.getUserLocation();
+    wx.eventChannel.on('languageChanged', this.handleLanguageChange);
+  },
+
+  onUnload() {
+    wx.eventChannel.off('languageChanged', this.handleLanguageChange);
+  },
+
+  handleLanguageChange(data) {
+    this.setData({
+      currentLang: data.lang
+    });
+  },
+
+  switchLanguage(e) {
+    const lang = e.currentTarget.dataset.lang;
+    app.switchLanguage(lang);
   },
 
   getUserLocation() {

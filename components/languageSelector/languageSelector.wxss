@@ -1,0 +1,103 @@
+/* 语言选择弹窗 */
+.language-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.language-modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20rpx 20rpx 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.language-modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 28rpx;
+  color: #999;
+  padding: 10rpx;
+}
+
+.language-list {
+  padding: 20rpx 0;
+}
+
+.language-item {
+  position: relative;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.item-hover {
+  background: #f0f0f0;
+}
+
+.language-item.active {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.lang-name {
+  font-size: 30rpx;
+}
+
+.native-name {
+  position: absolute;
+  right: 80rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.language-item.active .native-name {
+  color: #4CAF50;
+}
+
+.language-item icon {
+  position: absolute;
+  right: 30rpx;
+} 

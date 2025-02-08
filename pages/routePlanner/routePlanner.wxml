@@ -1,4 +1,11 @@
 <view class="container">
+  <!-- 语言切换 -->
+  <view class="language-switcher">
+    <text class="{{currentLang === 'th' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="th">ไทย</text>
+    <text class="{{currentLang === 'zh' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="zh">中文</text>
+    <text class="{{currentLang === 'en' ? 'active' : ''}}" bindtap="switchLanguage" data-lang="en">EN</text>
+  </view>
+
   <!-- 交通方式选择 -->
   <view class="transport-selector">
     <view 
@@ -7,7 +14,7 @@
       data-mode="driving"
     >
       <text class="transport-icon">🚗</text>
-      <text>驾车</text>
+      <text>{{transportModeText.driving[currentLang]}}</text>
     </view>
     <view 
       class="transport-item {{transportMode === 'transit' ? 'active' : ''}}"
@@ -15,7 +22,7 @@
       data-mode="transit"
     >
       <text class="transport-icon">🚌</text>
-      <text>公交</text>
+      <text>{{transportModeText.transit[currentLang]}}</text>
     </view>
     <view 
       class="transport-item {{transportMode === 'walking' ? 'active' : ''}}"
@@ -23,13 +30,13 @@
       data-mode="walking"
     >
       <text class="transport-icon">🚶</text>
-      <text>步行</text>
+      <text>{{transportModeText.walking[currentLang]}}</text>
     </view>
   </view>
 
   <!-- 景点选择列表 -->
   <scroll-view class="spots-selector" scroll-y>
-    <view class="section-title">选择要游览的景点</view>
+    <view class="section-title">{{translations.title[currentLang]}}</view>
     <view 
       class="spot-item {{selectedSpots.includes(item.id) ? 'selected' : ''}}"
       wx:for="{{spots}}" 
@@ -40,7 +47,10 @@
       <image src="{{item.image}}" mode="aspectFill"></image>
       <view class="spot-info">
         <text class="spot-name">{{currentLang === 'th' ? item.name : (currentLang === 'zh' ? item.name_zh : item.name_en)}}</text>
-        <text class="visit-time">建议游览时间：{{item.visitTime}}分钟</text>
+        <text class="visit-time">
+          {{currentLang === 'th' ? 'เวลาที่แนะนำ: ' : (currentLang === 'zh' ? '建议游览时间：' : 'Recommended time: ')}}
+          {{item.visitTime}}{{translations.minutes[currentLang]}}
+        </text>
         <text class="suggest-time">{{item.suggestTime}}</text>
       </view>
       <view class="checkbox">
@@ -51,25 +61,25 @@
 
   <!-- 生成路线按钮 -->
   <view class="generate-button" bindtap="generateRoute">
-    生成最佳路线
+    {{translations.generateRoute[currentLang]}}
   </view>
 
   <!-- 路线详情 -->
   <view class="route-details {{showRouteDetails ? 'show' : ''}}">
     <view class="details-header">
-      <text class="details-title">推荐路线</text>
+      <text class="details-title">{{translations.recommendedRoute[currentLang]}}</text>
       <icon type="cancel" size="24" color="#999" bindtap="closeRouteDetails"></icon>
     </view>
 
     <scroll-view class="details-content" scroll-y>
       <view class="summary">
         <view class="summary-item">
-          <text class="label">总距离</text>
-          <text class="value">{{routeDetails.totalDistance.toFixed(1)}}公里</text>
+          <text class="label">{{translations.totalDistance[currentLang]}}</text>
+          <text class="value">{{routeDetails.totalDistance.toFixed(1)}}{{translations.kilometer[currentLang]}}</text>
         </view>
         <view class="summary-item">
-          <text class="label">游览时间</text>
-          <text class="value">{{routeDetails.totalTime}}分钟</text>
+          <text class="label">{{translations.visitTime[currentLang]}}</text>
+          <text class="value">{{routeDetails.totalTime}}{{translations.minutes[currentLang]}}</text>
         </view>
       </view>
 
@@ -82,16 +92,16 @@
           <view class="segment-content">
             <view class="segment-header">
               <text class="from">{{item.from}}</text>
-              <text class="distance">{{item.distance}}km</text>
+              <text class="distance">{{item.distance}}{{translations.kilometer[currentLang]}}</text>
             </view>
             <view class="segment-info">
-              <text class="duration">约{{item.duration}}分钟</text>
+              <text class="duration">{{translations.about[currentLang]}}{{item.duration}}{{translations.minutes[currentLang]}}</text>
               <button 
                 class="nav-btn" 
                 size="mini" 
                 bindtap="startNavigation" 
                 data-index="{{index}}"
-              >导航</button>
+              >{{translations.navigation[currentLang]}}</button>
             </view>
           </view>
         </view>

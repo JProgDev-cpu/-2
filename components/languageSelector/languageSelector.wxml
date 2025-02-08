@@ -1,0 +1,43 @@
+<view class="language-modal {{show ? 'show' : ''}}">
+  <view class="modal-mask" bindtap="close"></view>
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">
+        {{currentLang === 'th' ? 'เลือกภาษา' : (currentLang === 'zh' ? '选择语言' : 'Select Language')}}
+      </text>
+      <view class="close-btn" bindtap="close">{{translations.close[currentLang]}}</view>
+    </view>
+    <view class="language-list">
+      <view 
+        class="language-item {{currentLang === 'th' ? 'active' : ''}}" 
+        bindtap="switchLanguage" 
+        data-lang="th"
+        hover-class="item-hover"
+      >
+        <text class="lang-name">{{translations.languageNames.th[currentLang]}}</text>
+        <text class="native-name">ไทย</text>
+        <icon wx:if="{{currentLang === 'th'}}" type="success" size="16" color="#4CAF50"/>
+      </view>
+      <view 
+        class="language-item {{currentLang === 'zh' ? 'active' : ''}}" 
+        bindtap="switchLanguage" 
+        data-lang="zh"
+        hover-class="item-hover"
+      >
+        <text class="lang-name">{{translations.languageNames.zh[currentLang]}}</text>
+        <text class="native-name">中文</text>
+        <icon wx:if="{{currentLang === 'zh'}}" type="success" size="16" color="#4CAF50"/>
+      </view>
+      <view 
+        class="language-item {{currentLang === 'en' ? 'active' : ''}}" 
+        bindtap="switchLanguage" 
+        data-lang="en"
+        hover-class="item-hover"
+      >
+        <text class="lang-name">{{translations.languageNames.en[currentLang]}}</text>
+        <text class="native-name">English</text>
+        <icon wx:if="{{currentLang === 'en'}}" type="success" size="16" color="#4CAF50"/>
+      </view>
+    </view>
+  </view>
+</view> 

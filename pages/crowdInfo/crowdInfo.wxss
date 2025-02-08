@@ -3,10 +3,35 @@
   background: #f5f5f5;
 }
 
-.spot-card {
-  background: #fff;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.refresh-btn {
+  padding: 10rpx 30rpx;
+  background: #4CAF50;
+  color: white;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+}
+
+.spots-list {
+  margin-top: 20rpx;
+}
+
+.spot-item {
+  background: white;
   border-radius: 15rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
   overflow: hidden;
   box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
 }
@@ -24,19 +49,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 15rpx;
 }
 
 .spot-name {
-  font-size: 34rpx;
+  font-size: 32rpx;
   font-weight: bold;
+  color: #333;
 }
 
-.crowd-badge {
-  padding: 8rpx 20rpx;
-  border-radius: 20rpx;
+.crowd-tag {
+  padding: 6rpx 20rpx;
+  border-radius: 30rpx;
   font-size: 24rpx;
-  color: #fff;
+  color: white;
 }
 
 .level-1 {
@@ -49,6 +75,54 @@
 
 .level-3 {
   background: #FF5722;
+}
+
+.update-time {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.prediction-section {
+  margin-top: 20rpx;
+  border-top: 1rpx solid #eee;
+  padding-top: 20rpx;
+}
+
+.prediction-title {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.prediction-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.prediction-item {
+  text-align: center;
+}
+
+.prediction-time {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.prediction-tag {
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: white;
+}
+
+.crowd-badge {
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #fff;
 }
 
 .crowd-details {
@@ -83,4 +157,204 @@
   height: 100%;
   background: #4CAF50;
   transition: width 0.3s ease;
+}
+
+.language-switcher {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20rpx;
+  background: white;
+  border-radius: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.language-switcher text {
+  margin-left: 20rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+}
+
+.language-switcher .active {
+  background: #4CAF50;
+  color: white;
+}
+
+/* 头部按钮组 */
+.header-btns {
+  display: flex;
+  align-items: center;
+}
+
+/* 语言切换按钮 */
+.language-btn {
+  padding: 10rpx 20rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.arrow {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 语言选择弹窗 */
+.language-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.language-modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20rpx 20rpx 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.language-modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.language-list {
+  padding: 20rpx 0;
+}
+
+.language-item {
+  position: relative;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.item-hover {
+  background: #f0f0f0;
+}
+
+.language-item:active {
+  background: #f0f0f0;
+}
+
+.language-item.active {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.lang-name {
+  font-size: 30rpx;
+}
+
+.native-name {
+  position: absolute;
+  right: 80rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.language-item.active .native-name {
+  color: #4CAF50;
+}
+
+.language-item icon {
+  position: absolute;
+  right: 30rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  padding: 100rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 30rpx 0;
+  color: #666;
+  font-size: 28rpx;
+}
+
+/* 优化语言切换按钮 */
+.language-btn {
+  padding: 10rpx 20rpx;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.language-btn:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* 优化语言选择弹窗 */
+.language-item {
+  position: relative;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.language-item:active {
+  background: #f0f0f0;
+}
+
+.language-item.active {
+  color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
 } 

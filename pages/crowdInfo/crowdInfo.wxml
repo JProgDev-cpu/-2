@@ -1,38 +1,125 @@
 <view class="container">
-  <view class="spot-list">
-    <view class="spot-card" wx:for="{{spots}}" wx:key="id">
-      <image class="spot-image" src="{{item.image}}" mode="aspectFill"></image>
-      <view class="spot-info">
-        <view class="spot-header">
-          <text class="spot-name">{{currentLang === 'th' ? item.name : (currentLang === 'zh' ? item.name_zh : item.name_en)}}</text>
-          <view class="crowd-badge level-{{item.crowdLevel}}">
-            {{item.crowdLevel === 1 ? '空闲' : (item.crowdLevel === 2 ? '适中' : '拥挤')}}
-          </view>
-        </view>
-        
-        <view class="crowd-details">
-          <view class="detail-item">
-            <text class="label">当前人数：</text>
-            <text class="value">{{item.currentCount}}</text>
-          </view>
-          <view class="detail-item">
-            <text class="label">最大容量：</text>
-            <text class="value">{{item.maxCount}}</text>
-          </view>
-          <view class="detail-item">
-            <text class="label">预计等待：</text>
-            <text class="value">{{item.waitTime}}</text>
-          </view>
-          <view class="detail-item">
-            <text class="label">最佳游览时间：</text>
-            <text class="value">{{item.bestVisitTime}}</text>
-          </view>
-        </view>
+  <!-- 标题栏 -->
+  <view class="header">
+    <text class="title">{{translations.title[currentLang]}}</text>
+    <view class="header-btns">
+      <!-- 语言切换按钮 -->
+      <view class="language-btn" bindtap="showLanguageSelector">
+        <text>{{translations.languageNames[currentLang][currentLang]}}</text>
+        <text class="arrow">▼</text>
+      </view>
+      <!-- 刷新按钮 -->
+      <view class="refresh-btn" bindtap="refreshData">
+        <text>{{translations.refresh[currentLang]}}</text>
+      </view>
+    </view>
+  </view>
 
-        <view class="progress-bar">
-          <view class="progress" style="width: {{item.currentCount / item.maxCount * 100}}%"></view>
+  <!-- 语言选择弹窗 -->
+  <view class="language-modal {{showLanguageModal ? 'show' : ''}}">
+    <view class="modal-mask" bindtap="hideLanguageSelector"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">
+          {{currentLang === 'th' ? 'เลือกภาษา' : (currentLang === 'zh' ? '选择语言' : 'Select Language')}}
+        </text>
+        <view class="close-btn" bindtap="hideLanguageSelector">×</view>
+      </view>
+      <view class="language-list">
+        <view 
+          class="language-item {{currentLang === 'th' ? 'active' : ''}}" 
+          bindtap="switchLanguage" 
+          data-lang="th"
+          hover-class="item-hover"
+        >
+          <text class="lang-name">{{translations.languageNames.th[currentLang]}}</text>
+          <text class="native-name">ไทย</text>
+          <icon wx:if="{{currentLang === 'th'}}" type="success" size="16" color="#4CAF50"/>
+        </view>
+        <view 
+          class="language-item {{currentLang === 'zh' ? 'active' : ''}}" 
+          bindtap="switchLanguage" 
+          data-lang="zh"
+          hover-class="item-hover"
+        >
+          <text class="lang-name">{{translations.languageNames.zh[currentLang]}}</text>
+          <text class="native-name">中文</text>
+          <icon wx:if="{{currentLang === 'zh'}}" type="success" size="16" color="#4CAF50"/>
+        </view>
+        <view 
+          class="language-item {{currentLang === 'en' ? 'active' : ''}}" 
+          bindtap="switchLanguage" 
+          data-lang="en"
+          hover-class="item-hover"
+        >
+          <text class="lang-name">{{translations.languageNames.en[currentLang]}}</text>
+          <text class="native-name">English</text>
+          <icon wx:if="{{currentLang === 'en'}}" type="success" size="16" color="#4CAF50"/>
         </view>
       </view>
     </view>
+  </view>
+
+  <!-- 景点列表 -->
+  <view class="spots-list">
+    <block wx:if="{{spots && spots.length > 0}}">
+      <view class="spot-item" wx:for="{{spots}}" wx:key="id">
+        <image class="spot-image" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="spot-info">
+          <view class="spot-header">
+            <text class="spot-name">{{getSpotName(item)}}</text>
+            <view class="crowd-badge level-{{item.crowdLevel}}">
+              {{getCrowdLevelText(item.crowdLevel)}}
+            </view>
+          </view>
+          
+          <view class="crowd-details">
+            <view class="detail-item">
+              <text class="label">{{translations.currentCount[currentLang]}}</text>
+              <text class="value">{{item.currentCount}}</text>
+            </view>
+            <view class="detail-item">
+              <text class="label">{{translations.maxCapacity[currentLang]}}</text>
+              <text class="value">{{item.maxCount}}</text>
+            </view>
+            <view class="detail-item">
+              <text class="label">{{translations.waitTime[currentLang]}}</text>
+              <text class="value">{{getWaitTimeText(item)}}</text>
+            </view>
+            <view class="detail-item">
+              <text class="label">{{translations.bestTime[currentLang]}}</text>
+              <text class="value">{{getBestTimeText(item)}}</text>
+            </view>
+          </view>
+
+          <view class="progress-bar">
+            <view class="progress" 
+                  style="width: {{item.currentCount / item.maxCount * 100}}%; background: {{getProgressColor(item.currentCount / item.maxCount * 100)}}">
+            </view>
+          </view>
+
+          <!-- 预测信息 -->
+          <view class="prediction-section">
+            <text class="prediction-title">{{translations.prediction[currentLang]}}</text>
+            <view class="prediction-list">
+              <view class="prediction-item" wx:for="{{item.prediction}}" wx:for-item="level" wx:key="index">
+                <view class="prediction-time">+{{index + 1}}{{translations.hours[currentLang]}}</view>
+                <view class="prediction-tag level-{{level}}">
+                  {{getCrowdLevelText(level)}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty-state">
+      <text>{{translations.noData[currentLang]}}</text>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{spots && spots.length > 0}}">
+    <text>{{translations.loadMore[currentLang]}}</text>
   </view>
 </view> 

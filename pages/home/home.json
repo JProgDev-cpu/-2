@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "language-selector": "../../components/languageSelector/languageSelector"
+  }
+} 
