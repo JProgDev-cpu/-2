@@ -156,7 +156,7 @@ Page({
           zh: '8:00-9:00',
           en: '8:00-9:00'
         },
-        image: '/assets/images/wat-phra-kaew.jpg'
+        image: '/assets/images/spots/great-wall.jpg'
       }
     ],
     showLanguageModal: false
