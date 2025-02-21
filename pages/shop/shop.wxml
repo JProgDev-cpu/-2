@@ -12,24 +12,17 @@
   </scroll-view>
 
   <!-- 商品列表 -->
-  <view class="products-grid">
-    <view 
-      class="product-card"
-      wx:for="{{products}}"
-      wx:key="id"
-      wx:if="{{item.categoryId === currentCategory}}"
-      bindtap="goToDetail"
-      data-id="{{item.id}}">
-      <image class="product-image" src="{{item.image}}" mode="aspectFill"></image>
+  <view class="product-grid">
+    <view class="product-item" wx:for="{{products}}" wx:key="id" 
+          wx:if="{{item.categoryId === currentCategory}}"
+          bindtap="goToDetail" data-id="{{item.id}}">
+      <image class="product-image" src="{{item.image}}" mode="aspectFill"/>
       <view class="product-info">
-        <text class="product-name">{{currentLang === 'th' ? item.name : (currentLang === 'zh' ? item.name_zh : item.name_en)}}</text>
-        <text class="product-price">฿{{item.price}}</text>
-        <button 
-          class="add-to-cart"
-          catchtap="addToCart"
-          data-id="{{item.id}}">
-          加入购物车
-        </button>
+        <view class="product-name">{{item['name_' + currentLang]}}</view>
+        <view class="product-price">฿{{item.price}}</view>
+        <view class="product-country">
+          {{item.country === 'th' ? '🇹🇭' : '🇨🇳'}}
+        </view>
       </view>
     </view>
   </view>

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "compress-images": "node build/compress-images.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.32.1",
+    "tinify": "^1.7.1"
+  }
+} 

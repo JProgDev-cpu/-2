@@ -73,6 +73,11 @@ Page({
     
     // 开始实时更新
     this.startRealTimeUpdate();
+    this.updateForecast();
+    // 每小时更新一次预测
+    setInterval(() => {
+      this.updateForecast();
+    }, 3600000);
   },
 
   onUnload() {
@@ -98,6 +103,7 @@ Page({
       name: 'พระบรมมหาราชวัง',
       name_zh: '大皇宫',
       name_en: 'Grand Palace',
+      image: '/assets/images/spots/grand-palace.jpg',
       currentCrowd: 2,
       bestVisitTime: {
         th: 'ช่วงเช้า 8:00-10:00',
@@ -120,5 +126,49 @@ Page({
         'spot.currentCrowd': currentCrowd
       });
     }, 30000); // 每30秒更新一次
+  },
+
+  // 获取人流量等级对应的样式类
+  getCrowdLevelClass(level) {
+    return `level-${level}`;
+  },
+
+  // 获取建议访问时间
+  getBestVisitTime() {
+    const hour = new Date().getHours();
+    if (hour < 10) {
+      return {
+        th: 'ขณะนี้เป็นช่วงเวลาที่เหมาะสม',
+        zh: '现在是最佳游览时间',
+        en: 'Now is the best time to visit'
+      };
+    }
+    return this.data.spot.bestVisitTime;
+  },
+
+  // 更新预测数据
+  updateForecast() {
+    const now = new Date();
+    const forecasts = [];
+    
+    for (let i = 1; i <= 3; i++) {
+      const futureTime = new Date(now.getTime() + i * 60 * 60 * 1000);
+      const hour = futureTime.getHours();
+      
+      // 根据时间段预测人流量
+      let level = 2;
+      if (hour < 10 || hour > 18) {
+        level = 1;
+      } else if (hour >= 12 && hour <= 14) {
+        level = 3;
+      }
+      
+      forecasts.push({
+        time: `${hour}:00`,
+        level: level
+      });
+    }
+    
+    this.setData({ crowdForecast: forecasts });
   }
 }); 

@@ -12,5 +12,16 @@ Page({
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  goToShop() {
+    wx.navigateTo({
+      url: '/packages/shop/pages/shop/shop'
+    });
+  },
+  
+  goToMonitor() {
+    wx.navigateTo({
+      url: '/packages/monitor/pages/crowdMonitor/crowdMonitor'
+    });
   }
 }) 

@@ -56,6 +56,63 @@ Page({
         price: 299,
         image: '/assets/images/products/brush.jpg',
         description: '传统毛笔书法套装'
+      },
+      // 新增泰国商品
+      {
+        id: 5,
+        categoryId: 1,
+        country: 'th',
+        name: 'ตุ๊กตาช้างผ้าไหม',
+        name_zh: '丝绸大象玩偶',
+        name_en: 'Silk Elephant Doll',
+        price: 299,
+        image: '/assets/images/products/elephant-doll.jpg',
+        description: '精美手工制作的丝绸大象玩偶'
+      },
+      {
+        id: 6,
+        categoryId: 3,
+        country: 'th',
+        name: 'ข้าวหอมมะลิ',
+        name_zh: '泰国茉莉香米',
+        name_en: 'Thai Jasmine Rice',
+        price: 199,
+        image: '/assets/images/products/rice.jpg',
+        description: '正宗泰国茉莉香米，香味浓郁'
+      },
+      // 新增中国商品
+      {
+        id: 7,
+        categoryId: 1,
+        country: 'cn',
+        name: 'พัดจีนโบราณ',
+        name_zh: '中国古典扇子',
+        name_en: 'Chinese Classical Fan',
+        price: 159,
+        image: '/assets/images/products/fan.jpg',
+        description: '优雅的中国传统折扇，竹制框架'
+      },
+      {
+        id: 8,
+        categoryId: 3,
+        country: 'cn',
+        name: 'ชาอู่หลง',
+        name_zh: '铁观音乌龙茶',
+        name_en: 'Oolong Tea',
+        price: 399,
+        image: '/assets/images/products/tea.jpg',
+        description: '正宗安溪铁观音，浓香型乌龙茶'
+      },
+      {
+        id: 9,
+        categoryId: 2,
+        country: 'cn',
+        name: 'ภาพวาดจีน',
+        name_zh: '中国水墨画',
+        name_en: 'Chinese Ink Painting',
+        price: 799,
+        image: '/assets/images/products/painting.jpg',
+        description: '传统中国水墨画，山水画作品'
       }
     ]
   },

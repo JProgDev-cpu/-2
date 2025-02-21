@@ -7,6 +7,23 @@
     "pages/shop/detail/detail",
     "pages/arView/arView"
   ],
+  "subpackages": [
+    {
+      "root": "packages/shop",
+      "pages": [
+        "pages/shop/shop",
+        "pages/shop/detail/detail"
+      ],
+      "independent": true
+    },
+    {
+      "root": "packages/monitor",
+      "pages": [
+        "pages/crowdMonitor/crowdMonitor"
+      ],
+      "independent": true
+    }
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#4CAF50",
